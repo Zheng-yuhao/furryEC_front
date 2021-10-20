@@ -20,28 +20,41 @@
                     <span @click="goPage('/light-course')" :class="{active: url_path === '/light-course'}">轻课</span>
                 </li>
             </ul>
-
+            <!--      Username not exists? => show the basic Head component     -->
             <div class="right-part">
-                <div>
-                    <span @click="pull_login">登录</span>
+                <div v-if="!username">
+                    <span @click="put_login">登录</span>
                     <span class="line">|</span>
-                    <span>注册</span>
+                    <span @click="put_register">注册</span>
                 </div>
-    		</div>
+
+            <!--    Username exists? => show the login Head component      -->
+
+                <div v-else>
+                    <span>{{ username }}</span>
+                    <span class="line">|</span>
+                    <span @click="logout" >Log Out</span>
+                </div>
+            </div>
         </div>
-      <login @close="close" v-if="is_login" />
+      <login v-if="is_login" @close="close_login" @go="put_register" @login_success="login_success"/>
+      <Register v-if="is_register" @close="close_register" @go="put_login" />
     </div>
 
 </template>
 
 <script>
 import login from "./login";
+import Register from "./Register";
     export default {
         name: "Header",
         data() {
             return {
                 url_path: sessionStorage.url_path || '/',
                 is_login: false,
+                is_register: false,
+                token:'',
+                username:'',
             }
         },
         methods: {
@@ -53,19 +66,41 @@ import login from "./login";
                 }
                 sessionStorage.url_path = url_path;
             },
-            close(){
+            close_login(){
               this.is_login = false
             },
-            pull_login(){
-              this.is_login = true
-            }
+            put_login(){
+              this.is_login = true;
+              this.is_register = false;
+            },
+            put_register(){
+              this.is_login = false;
+              this.is_register = true;
+            },
+            close_register(){
+              this.is_register = false
+            },
+            logout(){
+              this.$cookies.remove('username')
+              this.$cookies.remove('token')
+              this.username=''
+              this.token=''
+            },
+            login_success(){
+              this.username = this.$cookies.get('username')
+              this.token = this.$cookies.get('token')
+            },
         },
         created() {
             sessionStorage.url_path = this.$route.path;
             this.url_path = this.$route.path;
+            this.token = this.$cookies.get('token')
+            this.username = this.$cookies.get('username')
+
         },
         components: {
           login,
+          Register
         }
     }
 </script>
