@@ -11,7 +11,7 @@
         </div>
         <el-form v-if="login_method === 'is_pwd'">
           <el-input
-              placeholder="用户名/手机号/邮箱"
+              placeholder="用户名/邮箱"
               prefix-icon="el-icon-user"
               v-model="username"
               clearable>
@@ -27,11 +27,11 @@
         </el-form>
         <el-form v-if="login_method === 'is_sms'">
           <el-input
-              placeholder="手机号"
+              placeholder="Email"
               prefix-icon="el-icon-phone-outline"
-              v-model="mobile"
+              v-model="email"
               clearable
-              @blur="check_mobile">
+              @blur="check_email">
           </el-input>
           <el-input
               placeholder="验证码"
@@ -42,7 +42,7 @@
               <span class="sms" @click="send_sms">{{ sms_interval }}</span>
             </template>
           </el-input>
-          <el-button type="primary">登录</el-button>
+          <el-button type="primary" @click="code_login">登录</el-button>
         </el-form>
         <div class="foot">
           <span @click="go_register">立即注册</span>
@@ -59,7 +59,7 @@ export default {
     return {
       username: '',
       password: '',
-      mobile: '',
+      email: '',
       sms: '',
       login_method: 'is_pwd',
       sms_interval: '获取验证码',
@@ -76,31 +76,61 @@ export default {
     change_login_method(method) {
       this.login_method = method;
     },
-    check_mobile() {
-      if (!this.mobile) return;
-      if (!this.mobile.match(/^1[3-9][0-9]{9}$/)) {
+    check_email() {
+      if (!this.email) return;
+      if (!this.email.match(/^.+@.+$/)) {
         this.$message({
-          message: '手机号有误',
+          message: 'Email format is wrong',
           type: 'warning',
           duration: 1000,
           onClose: () => {
-            this.mobile = '';
+            this.email = '';
           }
         });
         return false;
       }
-      this.is_send = true;
+      this.$axios.get(this.$settings.base_url+'/user/check_email/', {
+        params:{email: this.email}
+      }).then(response=>{
+        if (response.data.code){
+          this.is_send = true;
+        } else {
+          this.$message({
+            message:'No the phone number.',
+            type:'warning',
+            duration:1000,
+            onClose:()=>{
+              this.email='';
+            }
+          });
+        }
+      }).catch(error=>{
+        console.log(error)
+      })
     },
     send_sms() {
 
       if (!this.is_send) return;
       this.is_send = false;
       let sms_interval_time = 60;
-      this.sms_interval = "发送中...";
+      this.sms_interval = "sending...";
+
+      this.$axios.get(this.$settings.base_url + '/user/send_email/', {params: {'email': this.email}})
+                    .then(response => {
+                        if (response.data.code) {
+                            this.$message({
+                                message: '发送验证码成功',
+                                type: 'success',
+                                duration: 1000,
+
+                            });
+                        }
+                    })
+
       let timer = setInterval(() => {
         if (sms_interval_time <= 1) {
           clearInterval(timer);
-          this.sms_interval = "获取验证码";
+          this.sms_interval = "Get Code";
           this.is_send = true; // 重新回复点击发送功能的条件
         } else {
           sms_interval_time -= 1;
@@ -133,6 +163,26 @@ export default {
         });
       }
     },
+    code_login(){
+      if (this.email && this.sms){
+        this.$axios.post(this.$settings.base_url+'/user/code_login/', {
+          email: this.email,
+          code: this.sms
+        }).then(response=>{
+          this.$cookies.set('token', response.data.token, '7d')
+          this.$cookies.set('username', response.data.username, '7d')
+          this.$emit('login_success')
+          this.$emit('close')
+        }).catch(errors=>{
+          console.log(errors)
+        })
+      } else {
+        this.$message({
+          message:'The email and code are needed.',
+          type:'warning'
+        })
+      }
+    }
   }
 }
 </script>
