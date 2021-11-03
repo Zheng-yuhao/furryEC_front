@@ -4,6 +4,7 @@ import Home from '../views/Home.vue'
 import FreeCourse from '../views/Freecourse.vue'
 import ActualCourse from '../views/Actualcourse.vue'
 import LightCourse from '../views/Lightcourse.vue'
+import FreeCourseDetail from "../views/FreeCourseDetail.vue";
 
 Vue.use(VueRouter)
 
@@ -27,6 +28,11 @@ const routes = [
     path:'/LightCourse',
     name:'LightCourse',
     component: LightCourse
+  },
+  {
+    path:'/free/detail/:pk',
+    name:'FreeCourseDetail',
+    component: FreeCourseDetail
   }
 
 ]

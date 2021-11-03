@@ -1,7 +1,7 @@
 <template>
     <div class="header">
         <div class="slogan">
-            <p>老男孩IT教育 | 帮助有志向的年轻人通过努力学习获得体面的工作和生活</p>
+            <p> github:@hirrochi0211 </p>
         </div>
         <div class="nav">
             <ul class="left-part">
@@ -36,6 +36,12 @@
                     <span @click="logout" >Log Out</span>
                 </div>
             </div>
+
+          <form class="search">
+
+
+          </form>
+
         </div>
       <login v-if="is_login" @close="close_login" @go="put_register" @login_success="login_success"/>
       <Register v-if="is_register" @close="close_register" @go="put_login" />
