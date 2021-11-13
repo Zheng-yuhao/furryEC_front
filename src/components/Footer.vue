@@ -1,14 +1,14 @@
 <template>
     <div class="footer">
         <ul>
-            <li>关于我们</li>
-            <li>联系我们</li>
-            <li>商务合作</li>
-            <li>帮助中心</li>
-            <li>意见反馈</li>
-            <li>新手指南</li>
+            <li>Welcome</li>
+            <li>to</li>
+            <li>the</li>
+            <li>Furry</li>
+            <li>Shopping</li>
+            <li>Site</li>
         </ul>
-        <p>Copyright © luffycity.com版权所有 | 京ICP备17072161号-1</p>
+        <p>@hirrochi0211</p>
     </div>
 </template>
 

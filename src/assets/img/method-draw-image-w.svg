@@ -1,0 +1,17 @@
+<svg width="420" height="300" xmlns="http://www.w3.org/2000/svg">
+ <!-- Created with Method Draw - http://github.com/duopixel/Method-Draw/ -->
+
+ <g>
+  <title>background</title>
+  <rect fill="#fffbf0" id="canvas_background" height="250" width="350" y="-1" x="-1"/>
+  <g display="none" overflow="visible" y="0" x="0" height="100%" width="100%" id="canvasGrid">
+   <rect fill="url(#gridpattern)" stroke-width="0" y="2" x="2" height="420" width="300"/>
+  </g>
+ </g>
+ <g>
+  <title>Layer 1</title>
+  <text font-style="italic" stroke="#000" transform="rotate(-6.847671985626221 262.22241210937455,149.09335327148477) matrix(1.8618022739131728,0,0,1.798175509756551,-129.04454519261589,-110.93853938682639) " x="146.045616" xml:space="preserve" text-anchor="start" font-family="'Shadows Into Light', serif" font-size="24" id="svg_1" y="153.726773" stroke-width="2" fill="#3E2A3C">FurryShopping</text>
+  <path stroke="#000" id="svg_2" d="m5.5,117.060341c199.78661,299.648856 122.449858,-77.990798 119.227493,-79.850776c3.222365,1.859978 151.45114,-6.34958 148.228775,-8.209558" opacity="0.5" stroke-width="3" fill="#fff"/>
+  <path stroke="#000" id="svg_5" d="m106.5,136.453125c0,-2.489704 294.837326,-42.324976 293.497156,-43.453123" opacity="0.5" fill-opacity="null" stroke-opacity="null" stroke-width="3" fill="none"/>
+ </g>
+</svg>

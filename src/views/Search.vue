@@ -93,14 +93,15 @@
             get_course() {
                 // 获取搜索的关键字
                 this.filter.search = this.$route.query.word || this.$route.query.wd;
-
+                console.log('111'+this.filter.search)
                 // 获取课程列表信息
                 this.$axios.get(`${this.$settings.base_url}/course/search/`, {
                     params: this.filter
                 }).then(response => {
+                    console.log(this.filter)
                     // 如果后台不分页，数据在response.data中；如果后台分页，数据在response.data.results中
-                    this.course_list = response.data.results;
-                    this.course_total = response.data.count;
+                    this.course_list = response.data;
+                    this.course_total = response.data.length;
                 }).catch(() => {
                     this.$message({
                         message: "获取课程信息有误，请联系客服工作人员"
