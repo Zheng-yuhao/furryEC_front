@@ -1,5 +1,10 @@
-<svg width="130" height="36" xmlns="http://www.w3.org/2000/svg">
+<svg width="119" height="36" xmlns="http://www.w3.org/2000/svg">
  <!-- Created with Method Draw - http://github.com/duopixel/Method-Draw/ -->
+ <defs>
+  <filter height="200%" width="200%" y="-50%" x="-50%" id="svg_3_blur">
+   <feGaussianBlur stdDeviation="0" in="SourceGraphic"/>
+  </filter>
+ </defs>
  <g>
   <title>background</title>
   <rect fill="#fff" id="canvas_background" height="38" width="121" y="-1" x="-1"/>
@@ -11,6 +16,6 @@
   <title>Layer 1</title>
   <path id="svg_1" d="m6.166901,20.302071c0,0 7.3333,9.33329 7.999963,9.33329c0.666664,0 -5.999972,-20.666572 -6.166902,-20.968735c0.166929,0.302163 88.166525,-5.031145 87.999594,-5.333309" opacity="0.5" stroke-width="1.5" stroke="#000" fill="#fff"/>
   <path id="svg_2" d="m3.500247,16.968753c0.666664,-0.666664 112.666149,-12.666609 112.499219,-12.968772" opacity="0.5" stroke-width="1.5" stroke="#000" fill="#462735"/>
-  <text font-weight="bold" stroke="null" transform="rotate(-4.593161582946777 65.49426269531254,18.601919174194396) matrix(1.7323409318923946,0,0,1.5077999830245972,-14.00394227944049,-6.795087090549109) " xml:space="preserve" text-anchor="start" font-family="'Shadows Into Light', serif" font-size="10" id="svg_3" y="20.533489" x="19.500173" stroke-width="0" fill="#000000">FurryShopping</text>
+  <text filter="url(#svg_3_blur)" font-weight="bold" stroke="null" transform="rotate(11.44526195526123 51.49016571044925,15.918705940246594) matrix(1.7323409318923946,0,0,1.5077999830245972,-14.00394227944049,-6.795087090549109) " xml:space="preserve" text-anchor="start" font-family="'Shadows Into Light', serif" font-size="10" id="svg_3" y="18.764916" x="11.41866" stroke-width="0" fill="#000000">FurryShopping</text>
  </g>
 </svg>

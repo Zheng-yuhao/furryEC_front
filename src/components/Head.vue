@@ -7,26 +7,26 @@
       <ul class="left-part">
         <li class="logo">
           <router-link to="/">
-            <img src="../assets/img/method-draw-image (s).svg" alt="">
+            <img src="../assets/img/method-draw-image (1).svg" alt="">
           </router-link>
         </li>
         <li class="ele">
-          <span @click="goPage('/free-course')" :class="{active: url_path === '/free-course'}">免费课</span>
+          <span @click="goPage('/free-course')" :class="{active: url_path === '/free-course'}">Light Course</span>
         </li>
         <li class="ele">
-          <span @click="goPage('/actual-course')" :class="{active: url_path === '/actual-course'}">实战课</span>
+          <span @click="goPage('/actual-course')" :class="{active: url_path === '/actual-course'}">waiting</span>
         </li>
         <li class="ele">
-          <span @click="goPage('/light-course')" :class="{active: url_path === '/light-course'}">轻课</span>
+          <span @click="goPage('/light-course')" :class="{active: url_path === '/light-course'}">waiting</span>
         </li>
       </ul>
 
       <!--       => show the basic Head component     -->
       <div class="right-part">
         <div v-if="!username">
-          <span @click="put_login">登录</span>
+          <span @click="put_login">Sign in</span>
           <span class="line">|</span>
-          <span @click="put_register">注册</span>
+          <span @click="put_register">Sign up</span>
         </div>
 
         <!--     => show the login Head component      -->
