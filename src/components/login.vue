@@ -5,36 +5,36 @@
       <div class="content">
         <div class="nav">
                     <span :class="{active: login_method === 'is_pwd'}"
-                          @click="change_login_method('is_pwd')">密码登录</span>
+                          @click="change_login_method('is_pwd')">login</span>
           <span :class="{active: login_method === 'is_sms'}"
-                @click="change_login_method('is_sms')">短信登录</span>
+                @click="change_login_method('is_sms')">Email login</span>
         </div>
         <el-form v-if="login_method === 'is_pwd'">
           <el-input
-              placeholder="用户名/邮箱"
+              placeholder="Username/Email"
               prefix-icon="el-icon-user"
               v-model="username"
               clearable>
           </el-input>
           <el-input
-              placeholder="密码"
+              placeholder="password"
               prefix-icon="el-icon-key"
               v-model="password"
               clearable
               show-password>
           </el-input>
-          <el-button type="primary" @click="login_password">登录</el-button>
+          <el-button type="primary" @click="login_password">Login</el-button>
         </el-form>
         <el-form v-if="login_method === 'is_sms'">
           <el-input
               placeholder="Email"
-              prefix-icon="el-icon-phone-outline"
+              prefix-icon="el-icon-message"
               v-model="email"
               clearable
               @blur="check_email">
           </el-input>
           <el-input
-              placeholder="验证码"
+              placeholder="code"
               prefix-icon="el-icon-chat-line-round"
               v-model="sms"
               clearable>
@@ -42,10 +42,10 @@
               <span class="sms" @click="send_sms">{{ sms_interval }}</span>
             </template>
           </el-input>
-          <el-button type="primary" @click="code_login">登录</el-button>
+          <el-button type="primary" @click="code_login">Login</el-button>
         </el-form>
         <div class="foot">
-          <span @click="go_register">立即注册</span>
+          <span @click="go_register">sign up now</span>
         </div>
       </div>
     </div>
@@ -62,7 +62,7 @@ export default {
       email: '',
       sms: '',
       login_method: 'is_pwd',
-      sms_interval: '获取验证码',
+      sms_interval: 'get code',
       is_send: false,
     }
   },
@@ -96,7 +96,7 @@ export default {
           this.is_send = true;
         } else {
           this.$message({
-            message:'No the phone number.',
+            message:'The Email is invalid.',
             type:'warning',
             duration:1000,
             onClose:()=>{
@@ -119,7 +119,7 @@ export default {
                     .then(response => {
                         if (response.data.code) {
                             this.$message({
-                                message: '发送验证码成功',
+                                message: 'successfully sending the confirmation code.',
                                 type: 'success',
                                 duration: 1000,
 
@@ -134,7 +134,7 @@ export default {
           this.is_send = true; // 重新回复点击发送功能的条件
         } else {
           sms_interval_time -= 1;
-          this.sms_interval = `${sms_interval_time}秒后再发`;
+          this.sms_interval = `${sms_interval_time}seconds retry`;
         }
       }, 1000);
     },

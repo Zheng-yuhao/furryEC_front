@@ -1,14 +1,9 @@
 <template>
     <div class="footer">
         <ul>
-            <li>Welcome</li>
-            <li>to</li>
-            <li>the</li>
-            <li>Furry</li>
-            <li>Shopping</li>
-            <li>Site</li>
+            <a>Welcome to the furry shopping site</a>
         </ul>
-        <p>@hirrochi0211</p>
+        <a>@hirrochi0211</a>
     </div>
 </template>
 

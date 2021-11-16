@@ -5,8 +5,8 @@
       <!-- 筛选条件 -->
       <div class="condition">
         <ul class="cate-list">
-          <li class="title">课程分类:</li>
-          <li :class="filter.course_category==0?'this':''" @click="filter.course_category=0">全部</li>
+          <li class="title">Course category:</li>
+          <li :class="filter.course_category==0?'this':''" @click="filter.course_category=0">All courses</li>
           <li :class="filter.course_category==category.id?'this':''" v-for="category in category_list"
               @click="filter.course_category=category.id" :key="category.name">{{ category.name }}
           </li>
@@ -14,19 +14,19 @@
 
         <div class="ordering">
           <ul>
-            <li class="title">筛&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;选:</li>
+            <li class="title">&nbsp;filter&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;:</li>
             <li class="default" :class="(filter.ordering=='id' || filter.ordering=='-id')?'this':''"
-                @click="filter.ordering='-id'">默认
+                @click="filter.ordering='-id'">default
             </li>
             <li class="hot" :class="(filter.ordering=='students' || filter.ordering=='-students')?'this':''"
-                @click="filter.ordering=(filter.ordering=='-students'?'students':'-students')">人气
+                @click="filter.ordering=(filter.ordering=='-students'?'students':'-students')">trend
             </li>
             <li class="price"
                 :class="filter.ordering=='price'?'price_up this':(filter.ordering=='-price'?'price_down this':'')"
-                @click="filter.ordering=(filter.ordering=='-price'?'price':'-price')">价格
+                @click="filter.ordering=(filter.ordering=='-price'?'price':'-price')">price
             </li>
           </ul>
-          <p class="condition-result">共{{ course_total }}个课程</p>
+          <p class="condition-result">{{ course_total }} courses have been found</p>
         </div>
 
       </div>
@@ -39,26 +39,26 @@
           <div class="course-info">
             <h3>
               <router-link :to="'/free/detail/'+course.id">{{ course.name }}</router-link>
-              <span><img src="@/assets/img/avatar1.svg" alt="">{{ course.students }}人已加入学习</span></h3>
+              <span><img src="@/assets/img/avatar1.svg" alt="">{{ course.students }}is starting the course.</span></h3>
             <p class="teather-info">
               {{ course.teacher.name }} {{ course.teacher.title }} {{ course.teacher.signature }}
               <span
-                  v-if="course.sections>course.pub_sections">共{{ course.sections }}课时/已更新{{ course.pub_sections }}课时</span>
-              <span v-else>共{{ course.sections }}课时/更新完成</span>
+                  v-if="course.sections>course.pub_sections">{{ course.sections }}courses/updated{{ course.pub_sections }}courses</span>
+              <span v-else>{{ course.sections }}courses/update completed</span>
             </p>
             <ul class="section-list">
               <li v-for="(section, key) in course.section_list" :key="section.name"><span
                   class="section-title">0{{ key + 1 }}  |  {{ section.name }}</span>
-                <span class="free" v-if="section.free_trail">免费</span></li>
+                <span class="free" v-if="section.free_trail">free</span></li>
             </ul>
             <div class="pay-box">
               <div v-if="course.discount_type">
                 <span class="discount-type">{{ course.discount_type }}</span>
-                <span class="discount-price">￥{{ course.real_price }}元</span>
-                <span class="original-price">原价：{{ course.price }}元</span>
+                <span class="discount-price">${{ course.real_price }}</span>
+                <span class="original-price">price：{{ course.price }}</span>
               </div>
-              <span v-else class="discount-price">￥{{ course.price }}元</span>
-              <span class="buy-now" @click="buy_now(course)">立即购买</span>
+              <span v-else class="discount-price">${{ course.price }}</span>
+              <span class="buy-now" @click="buy_now(course)">BUY NOW</span>
             </div>
           </div>
         </div>
@@ -139,7 +139,7 @@ export default {
         this.category_list = response.data;
       }).catch(() => {
         this.$message({
-          message: "获取课程分类信息有误，请联系客服工作人员",
+          message: "system error, please contact the manager.",
         })
       })
     },
@@ -178,7 +178,7 @@ export default {
         // console.log(this.course_list);
       }).catch(() => {
         this.$message({
-          message: "获取课程信息有误，请联系客服工作人员"
+          message: "system error, please contact the manager."
         })
       })
     },
